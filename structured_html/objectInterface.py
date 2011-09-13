@@ -1,4 +1,4 @@
-class Node(Object):
+class Node(object):
     address= None
 
     def GetAttributes(self):
@@ -13,7 +13,7 @@ class Node(Object):
     def __setattr__(self, item, value):
         pass
 
-class Attribute(Object):
+class Attribute(object):
     type= None
     name= None
     webElement= None
@@ -31,22 +31,41 @@ class TextAttribute(Attribute):
 class PictureAttribute(Attribute):
     def __get__( self, instance, owner ):
         pass
-
-class LinkAttribute(Attribute):
-    def __get__( self, instance, owner ):
+    
+class InputMethod(object):
+    def setValue(self, *args):
         pass
+
+class TextInputMethod(InputMethod):
+    def setValue(self, *args):
+        self.webElement.setValue(args[0])
+
+class ClickInputMethod(InputMethod):
+    def setValue(self, *args):
+        self.webElement.click()
+        
+class OptionInputMethod(InputMethod):
+    def setValue(self, *args):
+        self.webElement.setValue(args[0])
 
 class InputAttribute(Attribute):
-    def __get__( self, instance, owner ):
-        pass
-    def __set__(self, instance, value):
-        pass
+    def __init__(self, inputMethod):
+        self.inputMethod= inputMethod
+        
+    def setValue(self, *args):
+        return self.inputMethod.setValue(args)
+    
+    def getValue(self):
+        return self.inputMethod.getValue()
+    
+class SimpleInputAttribute(InputAttribute):
+    pass
 
-class RemoteLinkAttribute(Attribute):
-    linkAddress= None
-    parserDefinition= None
-    parserEngine= None
+class ParseInputAttribute(InputAttribute):
+    '''
+    Uses parserBlock to create interface for the
+    same page or for new page.
+    '''
+    parserBlock= None
     webEngine= None
-
-    def __get__( self, instance, owner ):
-        pass
+    newPage= True

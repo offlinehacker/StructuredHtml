@@ -1,0 +1,92 @@
+<!-- Copyright (C) 2008 Mozenda, Inc. All rights reserved. -->
+
+<Agent>
+  <Version>1.0i</Version>
+  <IeVersion>9.0</IeVersion>
+  <AgentDefinition>
+
+    <!--- - - - - - - - Actions - - - - - - - - -->
+
+    <ActionList>
+
+      <Action>
+        <ActionType>LoadPage</ActionType>
+        <Page>0</Page>
+        <DestinationPage>1</DestinationPage>
+        <TopLevelNav>True</TopLevelNav>
+        <TopLevelNavCount>1</TopLevelNavCount>
+        <PageUrl>http://www.megagames.com/</PageUrl>
+      </Action>
+
+      <!-- Page 1 -->
+
+      <Action>
+        <ActionType>PagePlaceHolder</ActionType>
+        <Page>1</Page>
+        <ItemType>PlaceHolder</ItemType>
+        <LoadUrl>http://www.megagames.com/</LoadUrl>
+        <BaseUrl>http://www.megagames.com/</BaseUrl>
+        <CaptureScreenShot>False</CaptureScreenShot>
+        <NonScrollingScreenShot>False</NonScrollingScreenShot>
+      </Action>
+
+      <Action>
+        <ActionType>BeginAnchorList</ActionType>
+        <Page>1</Page>
+        <ItemType>PlaceHolder</ItemType>
+        <ItemXPath>//*[@id=&amp;quot;front-page-content&amp;quot;]/div[1]/div[2]/ul[1]/li/div[2]</ItemXPath>
+        <ItemXPath>/html[1]/body[1]/div[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[2]/ul[1]/li/div[2]</ItemXPath>
+        <ListName>articlesList</ListName>
+      </Action>
+
+      <Action>
+        <ActionType>GetElementValue</ActionType>
+        <Description>Captures the text of the list item</Description>
+        <Page>1</Page>
+        <ItemType>PlaceHolder</ItemType>
+        <ItemXPath>.</ItemXPath>
+        <FieldExpression>%articles%</FieldExpression>
+      </Action>
+
+      <Action>
+        <ActionType>ClickElement</ActionType>
+        <Page>1</Page>
+        <DestinationPage>2</DestinationPage>
+        <TopLevelNav>True</TopLevelNav>
+        <TopLevelNavCount>1</TopLevelNavCount>
+        <ItemType>PlaceHolder</ItemType>
+        <ItemXPath>a[1]</ItemXPath>
+      </Action>
+
+      <Action>
+        <ActionType>EndList</ActionType>
+        <Page>1</Page>
+        <ListName>articlesList</ListName>
+      </Action>
+
+      <!-- Page 2 -->
+
+      <Action>
+        <ActionType>PagePlaceHolder</ActionType>
+        <Page>2</Page>
+        <ItemType>PlaceHolder</ItemType>
+        <LoadUrl>http://www.megagames.com/news/body-organs-and-sexual-object-removed-japanese-deus-ex</LoadUrl>
+        <BaseUrl>http://www.megagames.com/news/body-organs-and-sexual-object-removed-japanese-deus-ex</BaseUrl>
+        <CaptureScreenShot>False</CaptureScreenShot>
+        <NonScrollingScreenShot>False</NonScrollingScreenShot>
+      </Action>
+
+      <Action>
+        <ActionType>GetElementValue</ActionType>
+        <Page>2</Page>
+        <ItemType>PlaceHolder</ItemType>
+        <ItemXPath>//*[@id=&amp;quot;description-tab&amp;quot;]</ItemXPath>
+        <ItemXPath>/html[1]/body[1]/div[2]/div[4]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]</ItemXPath>
+        <ID>description-tab</ID>
+        <FieldExpression>%details%</FieldExpression>
+      </Action>
+
+    </ActionList>
+
+  </AgentDefinition>
+</Agent>
